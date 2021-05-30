@@ -20,7 +20,7 @@ defmodule SafebodaFullstack.MixProject do
   def application do
     [
       mod: {SafebodaFullstack.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :guardian]
     ]
   end
 

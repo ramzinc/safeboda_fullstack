@@ -3,14 +3,14 @@ defmodule SafebodaFullstackWeb.UserControllerTest do
 
   alias SafebodaFullstack.Accounts
   alias SafebodaFullstack.Accounts.User
+  alias SafebodaFullstack.Accounts.Driver
 
   @create_attrs %{
-    email: "some email",
-    first_name: "some first_name",
-    last_name: "some last_name",
-    phone_number: "some phone_number",
-    status: "some status",
-    user_type: "some user_type"
+    email: "mpiima@pprotonmail.com",
+    first_name: "first_name_est",
+    last_name: "last_name_test",
+    phone_number: "+256752000000",
+    user_type: "driver"
   }
   @update_attrs %{
     email: "some updated email",
@@ -20,7 +20,14 @@ defmodule SafebodaFullstackWeb.UserControllerTest do
     status: "some updated status",
     user_type: "some updated user_type"
   }
-  @invalid_attrs %{email: nil, first_name: nil, last_name: nil, phone_number: nil, status: nil, user_type: nil}
+  @invalid_attrs %{
+    email: nil,
+    first_name: nil,
+    last_name: nil,
+    phone_number: nil,
+    status: nil,
+    user_type: nil
+  }
 
   def fixture(:user) do
     {:ok, user} = Accounts.create_user(@create_attrs)

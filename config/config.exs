@@ -18,7 +18,7 @@ config :safeboda_fullstack, SafebodaFullstackWeb.Endpoint,
   pubsub_server: SafebodaFullstack.PubSub,
   live_view: [signing_salt: "fXvUaZ+4"]
 
-config :safeboda_fullstack, SafeBodaFullStackWeb.AdminToken,
+config :safeboda_fullstack, SafebodaFullstackWeb.AdminToken,
   issuer: "safeboda_fullstack",
   secret_key: "ub6UE2JROPymf39SgoJcR8oF5+4aKHaFkr7PasNGGCqiI9C+HhHa/6XIHYxEzNoi"
 

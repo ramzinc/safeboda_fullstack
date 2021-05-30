@@ -1,4 +1,4 @@
-defmodule SafeBodaFullStackWeb.AdminToken do
+defmodule SafebodaFullstackWeb.AdminToken do
   use Guardian, otp_app: :safeboda_fullstack
 
   def subject_for_token(admin, _claims) do

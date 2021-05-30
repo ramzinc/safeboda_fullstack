@@ -15,7 +15,7 @@ defmodule SafebodaFullstackWeb.Router do
   end
 
   pipeline :ensure_authenticated_as_admin do
-    plug SafeBodaFullStackWeb.GuardPipeline
+    plug SafebodaFullstackWeb.GuardPipeline
   end
 
   # scope "/", SafebodaFullstackWeb do
@@ -28,16 +28,16 @@ defmodule SafebodaFullstackWeb.Router do
 
     post("/login", AdminController, :login)
 
-    # scope "/admin", Admin do
-    #   pipe_through([:ensure_authenticated_as_admin])
-    #   post("/driver", DriverController, :new)
-    #   #   post("/driver/:driver_id/suspend", DriverController, :suspend)
-    #   delete("/driver/:driver_id/suspend", DriverController, :unsuspend)
-    #   post("/passenger", PassengerController, :new)
-    #   post("/ride/:passenger_id/:driver_id", RideController, :new)
-    #   post("/ride/:ride_id/stop", RideController, :stop_ride)
-    #   get("/rides/ongoing", RideController, :ongoing)
-    # end
+    scope "/admin", Admin do
+      pipe_through(:ensure_authenticated_as_admin)
+      post("/driver", DriverController, :new)
+      post("/driver/:driver_id/suspend", DriverController, :suspend)
+      delete("/driver/:driver_id/suspend", DriverController, :unsuspend)
+      #   post("/passenger", PassengerController, :new)
+      #   post("/ride/:passenger_id/:driver_id", RideController, :new)
+      #   post("/ride/:ride_id/stop", RideController, :stop_ride)
+      #   get("/rides/ongoing", RideController, :ongoing)
+    end
   end
 
   # Other scopes may use custom stacks.

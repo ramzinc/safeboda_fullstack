@@ -1,7 +1,7 @@
-defmodule SafeBodaFullStack.Admin do
+defmodule SafebodaFullstack.Admin do
   @derive Jason.Encoder
   defstruct email: nil, password: nil
-  alias SafeBodaFullStack.Admin
+  alias SafebodaFullstack.Admin
 
   def authenticate_admin_user(_admin, email, password) do
     if %Admin{email: "mpiima@protonmail.com", password: "B3stp4ssw0rd"} == %Admin{
@@ -12,5 +12,9 @@ defmodule SafeBodaFullStack.Admin do
     else
       "The Email OR Password Entered are false"
     end
+  end
+
+  def get_admin_user() do
+    %Admin{email: "mpiima@protonmail.com", password: "B3stp4ssw0rd"}
   end
 end

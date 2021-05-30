@@ -6,7 +6,7 @@ defmodule SafebodaFullstack.Accounts do
   import Ecto.Query, warn: false
   alias SafebodaFullstack.Repo
 
-  alias SafebodaFullstack.Accounts.User
+  alias SafebodaFullstack.Accounts.{User, Driver}
 
   @doc """
   Returns the list of users.
@@ -49,10 +49,68 @@ defmodule SafebodaFullstack.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_user(attrs \\ %{}) do
-    %User{}
-    |> User.changeset(attrs)
-    |> Repo.insert()
+
+  # def create_user(attrs \\ %{}) do
+  #   %User{}
+  #   |> User.changeset(attrs)
+  #   |> Repo.insert()
+  # end
+
+  def create_user(attrs = %{"user_type" => "driver"}) do
+    {:ok, driver} =
+      Repo.transaction(fn ->
+        user =
+          %User{}
+          |> User.changeset(attrs)
+          |> Repo.insert!()
+
+        driver = Ecto.build_assoc(user, :drivers, %{"user_id" => user.id, "suspended" => false})
+        Repo.insert!(driver)
+      end)
+
+    get_driver(driver.id)
+  end
+
+  def get_driver(driver_id) do
+    Repo.one!(
+      from d in Driver,
+        where: d.id == ^driver_id,
+        join: u in User,
+        on: d.user_id == u.id,
+        select: %{
+          id: u.id,
+          suspended: d.suspended,
+          first_name: u.first_name,
+          last_name: u.last_name,
+          phone_number: u.phone_number
+        }
+    )
+  end
+
+  def suspend_driver(driver_id) do
+    driver = Repo.get_by!(Driver, user_id: driver_id)
+    change_driver = Ecto.Changeset.change(driver, %{suspended: true})
+
+    resp =
+      case(Repo.update(change_driver)) do
+        {:ok, _struct} -> 204
+        {:error, _changeset_error} -> 400
+      end
+
+    resp
+  end
+
+  def unsuspend_driver(driver_id) do
+    driver = Repo.get_by!(Driver, user_id: driver_id)
+    change_driver = Ecto.Changeset.change(driver, %{suspended: false})
+
+    resp =
+      case Repo.update(change_driver) do
+        {:ok, _struct} -> 204
+        {:error, _changeset_error} -> 400
+      end
+
+    resp
   end
 
   @doc """
