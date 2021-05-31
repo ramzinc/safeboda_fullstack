@@ -33,7 +33,7 @@ defmodule SafebodaFullstackWeb.Router do
       post("/driver", DriverController, :new)
       post("/driver/:driver_id/suspend", DriverController, :suspend)
       delete("/driver/:driver_id/suspend", DriverController, :unsuspend)
-      #   post("/passenger", PassengerController, :new)
+      post("/passenger", PassengerController, :new)
       #   post("/ride/:passenger_id/:driver_id", RideController, :new)
       #   post("/ride/:ride_id/stop", RideController, :stop_ride)
       #   get("/rides/ongoing", RideController, :ongoing)

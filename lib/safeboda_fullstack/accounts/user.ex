@@ -2,6 +2,7 @@ defmodule SafebodaFullstack.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
   alias SafebodaFullstack.Accounts.Driver
+  alias SafebodaFullstack.Accounts.Passenger
   @derive Jason.Encoder
 
   schema "users" do
@@ -11,6 +12,7 @@ defmodule SafebodaFullstack.Accounts.User do
     field :phone_number, :string
     field :user_type, :string
     has_one :drivers, Driver
+    has_one :passengers, Passenger
     timestamps()
   end
 

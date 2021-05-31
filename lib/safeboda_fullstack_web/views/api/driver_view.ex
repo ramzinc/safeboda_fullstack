@@ -4,8 +4,8 @@ defmodule SafebodaFullstackWeb.Api.Admin.DriverView do
   def render("driver.json", %{driver: driver}) do
     %{
       data: %{
-        suspended: driver.suspended,
         id: driver.id,
+        suspended: driver.suspended,
         name: driver.first_name <> " " <> driver.last_name,
         phone_numer: driver.phone_number
       }
