@@ -18,11 +18,13 @@ defmodule SafebodaFullstackWeb.Router do
     plug SafebodaFullstackWeb.GuardPipeline
   end
 
-  # scope "/", SafebodaFullstackWeb do
-  #   pipe_through :browser
+  scope "/", SafebodaFullstackWeb do
+    pipe_through :browser
 
-  #   live "/", PageLive, :index
-  # end
+    # live "/", PageLive, :index
+    get "/", PageController, :index
+  end
+
   scope "/", SafebodaFullstackWeb.Api do
     pipe_through :api
 
