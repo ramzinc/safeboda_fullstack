@@ -1,18 +1,19 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Welcome to The SafebodaFullstack Admin App" />
+    <img alt="Vue logo" src="/images/logo.png">
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     HelloWorld
   }
-};
+}
 </script>
 
 <style>

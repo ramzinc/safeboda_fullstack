@@ -38,12 +38,25 @@ module.exports = (env, options) => {
         {
           test: /\.[s]?css$/,
           use: [
-            MiniCssExtractPlugin.loader,
+            process.env.NODE_ENV !== "production"
+              ? "vue-style-loader"
+              : MiniCssExtractPlugin.loader,
             "css-loader",
-            "vue-style-loader",
-            "sass-loader",
-            "style-loader"
+            "sass-loader"
           ]
+        },
+        {
+          test: /\.(png|jpg|gif)$/i,
+          use: [
+            {
+              loader: "url-loader",
+              options: {
+                limit: false
+              }
+            }
+          ],
+
+          type: "javascript/auto"
         },
         {
           test: /\.vue$/,
@@ -51,12 +64,12 @@ module.exports = (env, options) => {
         }
       ]
     },
-    resolve: {
-      alias: {
-        vue$: "vue/dist/vue.esm.js"
-      },
-      extensions: ["*", ".js", ".vue", ".json"]
-    },
+    // resolve: {
+    //   alias: {
+    //     vue$: "vue/dist/vue.esm.js"
+    //   },
+    //   extensions: ["*", ".js", ".vue", ".json"]
+    // },
     plugins: [
       new MiniCssExtractPlugin({ filename: "../css/app.css" }),
       new CopyWebpackPlugin([{ from: "static/", to: "../" }]),
