@@ -12,6 +12,6 @@ defmodule SafebodaFullstack.Repo.Migrations.CreateUsers do
 
       timestamps()
     end
-
+    create unique_index("users", [:phone_number, :user_type], name: :user_phone_constraint)
   end
 end

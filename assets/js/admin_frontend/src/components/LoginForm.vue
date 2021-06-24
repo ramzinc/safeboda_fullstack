@@ -53,15 +53,16 @@ module.exports = {
           return response.json();
         })
         .then(data => {
-          var resp_data = JSON.stringify(data);
+          //var resp_data = JSON.stringify(data);
           console.log("This is the loginAdmin:");
-          console.log(resp_data);
-          let localStorage = window.localStorage;
-          localStorage.setItem("accessToken", resp_data.token);
-          let keys = Object.keys(this);
-          console.log(keys);
-          if (localStorage.getItem("accessToken") != null) {
-            this.$router.push({ name: 'home'});
+          console.log(typeof data);
+          window.localStorage.setItem("accessSBToken", data.token);
+          console.log(data["token"]);
+          if (
+            window.localStorage.getItem("accessSBToken") != "undefined" ||
+            window.localStorage.getItem("accessSBToken") != null
+          ) {
+            this.$router.push({ name: "home" });
           }
         });
       console.log({ email: this.login.email, password: this.login.password });

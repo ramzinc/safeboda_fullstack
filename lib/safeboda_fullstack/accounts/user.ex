@@ -21,5 +21,6 @@ defmodule SafebodaFullstack.Accounts.User do
     user
     |> cast(attrs, [:first_name, :last_name, :phone_number, :user_type, :email])
     |> validate_required([:first_name, :last_name, :phone_number, :user_type])
+    |> unique_constraint([:phone_number, :user_type], name: :user_phone_constraint)
   end
 end

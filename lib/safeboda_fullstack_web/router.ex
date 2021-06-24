@@ -32,6 +32,7 @@ defmodule SafebodaFullstackWeb.Router do
 
     scope "/admin", Admin do
       pipe_through(:ensure_authenticated_as_admin)
+      get("/drivers", DriverController, :index)
       post("/driver", DriverController, :new)
       post("/driver/:driver_id/suspend", DriverController, :suspend)
       delete("/driver/:driver_id/suspend", DriverController, :unsuspend)

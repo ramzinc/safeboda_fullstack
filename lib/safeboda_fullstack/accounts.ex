@@ -103,6 +103,28 @@ defmodule SafebodaFullstack.Accounts do
     )
   end
 
+  def list_drivers() do
+    %{entries: drivers, metadata: _metadata} =
+      Repo.paginate(
+        from(d in Driver,
+          join: u in User,
+          on: d.user_id == u.id,
+          select: %{
+            id: u.id,
+            suspended: d.suspended,
+            first_name: u.first_name,
+            last_name: u.last_name,
+            phone_number: u.phone_number
+          },
+          order_by: [desc: d.inserted_at]
+        ),
+        limit: 5,
+        cursor_fields: [:inserted_at]
+      )
+
+    drivers
+  end
+
   def suspend_driver(driver_id) do
     driver = Repo.get_by!(Driver, user_id: driver_id)
     change_driver = Ecto.Changeset.change(driver, %{suspended: true})

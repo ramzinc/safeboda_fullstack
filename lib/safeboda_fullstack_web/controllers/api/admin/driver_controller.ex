@@ -19,4 +19,9 @@ defmodule SafebodaFullstackWeb.Api.Admin.DriverController do
     status = Accounts.unsuspend_driver(driver_id)
     send_resp(conn, status, "")
   end
+
+  def index(conn, _params) do
+    drivers = Accounts.list_drivers()
+    render(conn, "drivers.json", %{drivers: drivers})
+  end
 end
